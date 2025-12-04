@@ -1,12 +1,14 @@
 /* Color Palette Variables */
 :root {
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
-    --accent-color: #4CAF50;
-    --dark-bg: #333;
+    --primary-color: #FF937E;
+    --secondary-color: #C1E59F;
+    --accent-color: #C1E59F;
+    --nabbar-bg: #333;
     --dark-hover: #555;
+    --bg-dark-1: #282828;
+    --bg-dark-2: #353535;
     --light-text: #ffffff;
-    --dark-text: #333333;
+    --mid-text: #e7e7e7;
     --border-shadow: rgba(0, 0, 0, 0.1);
     --transition-speed: 0.3s ease;
     --size: 80px;     /* square size */
@@ -15,7 +17,7 @@
 
 /* Navbar Styling */
 .navbar {
-    background-color: var(--dark-bg);
+    background-color: var(--nabbar-bg);
     padding: 0;
     margin: 0;
     box-shadow: 0 2px 5px var(--border-shadow);
@@ -86,14 +88,13 @@ main {
 
 .elements-list h2 {
     grid-column: 1 / -1;
-    color: var(--dark-text);
+    color: var(--light-text);
     margin-top: 0;
 }
 
 /* Element Card Styling */
 .element-card {
-    background: white;
-    border: 1px solid #e0e0e0;
+    background: var(--bg-dark-2);
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 8px var(--border-shadow);
@@ -132,7 +133,7 @@ main {
 }
 
 .element-description {
-    color: #666;
+    color: var(--mid-text);
     line-height: 1.6;
     margin: 15px 0;
 }
@@ -147,12 +148,12 @@ main {
 }
 
 .stars {
-    color: #FFD700;
+    color: var(--accent-color);
     font-size: 1.3em;
 }
 
 .rating-value {
-    color: #888;
+    color: var(--mid-text);
     font-weight: 500;
 }
 
@@ -166,7 +167,8 @@ main {
 
 .tag {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: transparent;
+    border: var(--primary-color) 2px solid;
     color: var(--light-text);
     padding: 5px 12px;
     border-radius: 20px;
@@ -176,14 +178,12 @@ main {
 
 /* Related To Section */
 .element-related {
-    border-top: 1px solid #e0e0e0;
-    padding-top: 15px;
-    margin-top: 15px;
+    margin-top: 6px;
 }
 
 .element-related p {
     margin: 0;
-    color: #555;
+    color: var(--mid-text);
     font-size: 0.95em;
 }
 
@@ -232,7 +232,7 @@ main {
 
 /* Footer Styling */
 footer {
-    background-color: var(--dark-bg);
+    background-color: var(--nabbar-bg);
     color: var(--light-text);
     text-align: center;
     padding: 20px;
@@ -260,6 +260,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--bg-dark-1);
 }
 
 main {
