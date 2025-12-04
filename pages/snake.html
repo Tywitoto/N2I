@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Snake — HTML5 Canvas</title>
+  <title>Snake</title>
   <style>
     :root{
       --bg:#0f1724; /* dark navy */
@@ -68,7 +68,7 @@
 <body>
   <div class="wrap">
     <div class="card">
-      <h1>Snake (HTML5)</h1>
+      <h1>Snake </h1>
       <canvas id="game" width="640" height="640" aria-label="Snake game canvas"></canvas>
       <div class="touch-controls" id="touchControls" aria-hidden="true">
         <div style="display:flex;flex-direction:column;gap:8px;align-items:center">
@@ -77,20 +77,20 @@
           <div class="touch-btn" data-dir="down">↓</div>
         </div>
       </div>
-      <p class="foot">Use arrows or WASD to move. Tap the touch buttons on mobile. Game saves high score locally.</p>
+      <p class="foot">Utiliser les flêches du clavier pour jouer ou ZQSD.</p>
     </div>
 
     <div class="card">
       <div class="controls">
         <div class="row">
-          <button class="btn primary" id="startBtn">Start / Restart</button>
+          <button class="btn primary" id="startBtn">Commancer / Recommancer</button>
           <button class="btn" id="pauseBtn">Pause</button>
         </div>
 
         <div class="info">
           <div class="stat"><span>Score</span><strong id="score">0</strong></div>
-          <div class="stat"><span>High score</span><strong id="highscore">0</strong></div>
-          <div class="stat"><span>Speed</span><strong id="speedLabel">Normal</strong></div>
+          <div class="stat"><span>Highscore</span><strong id="highscore">0</strong></div>
+          <div class="stat"><span>Vitesse</span><strong id="speedLabel">Normal</strong></div>
         </div>
 
         <div>
@@ -102,10 +102,10 @@
               <option value="64">64 × 64 (large)</option>
             </select>
             <select id="speedSelect" class="btn">
-              <option value="8">Slow</option>
+              <option value="8">Lent</option>
               <option value="12" selected>Normal</option>
-              <option value="16">Fast</option>
-              <option value="22">Very fast</option>
+              <option value="16">Rapide</option>
+              <option value="22">Très Rapide</option>
             </select>
           </div>
         </div>
@@ -113,16 +113,16 @@
         <div style="margin-top:10px">
           <label style="font-size:13px;color:var(--muted)">Mode</label>
           <div class="row" style="margin-top:6px">
-            <button class="btn" id="wrapToggle">Wrap: ON</button>
-            <button class="btn" id="gridToggle">Show Grid: OFF</button>
+            <button class="btn" id="wrapToggle">Bordure: ON</button>
+            <button class="btn" id="gridToggle">Afficher la grille: OFF</button>
           </div>
         </div>
 
         <div style="margin-top:10px">
           <label style="font-size:13px;color:var(--muted)">Quick actions</label>
           <div class="row" style="margin-top:6px">
-            <button class="btn" id="seedFood">Place food</button>
-            <button class="btn" id="saveHS">Reset Highscore</button>
+            <button class="btn" id="seedFood">Placer une nourriture</button>
+            <button class="btn" id="saveHS">Réinitialiser Highscore</button>
           </div>
         </div>
 
