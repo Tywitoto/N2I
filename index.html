@@ -2,23 +2,14 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="ressources\Logo\logosite.png">
+    <link rel="icon" href="ressources/Logo/logosite.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenListe</title>
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
     <nav class="navbar">
-        <div class="menu-toggle">
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <ul class="dropdown-menu">
-                <li><a href="index.html#home">Accueil</a></li>
-                <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>   
-                <li><a href="pages/snake.html">Snake</a></li>
-                <li><a href="index.html#services">Hardware responsable</a></li>
-                <li><a href="index.html#contact">A propos</a></li>   
-            </ul>
-        </div>
+        <img src="./ressources/icon.png" class="icon" alt="OpenListe logo">
         <ul class="nav-links">
             <li><a href="index.html#home"><b>Accueil</b></a></li>
             <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>
@@ -30,7 +21,9 @@
                 <input type="text" placeholder="Rechercher..." id="search-input">
                 <button type="submit" class="search-btn">🔎︎</button>
             </form>
-            <div class="logo-circle"></div>
+            <div class="logo-circle">
+                <img src="ressources/Logo/logosite.png" alt="Logo site">
+            </div>
         </div>
     </nav>
     
@@ -44,10 +37,30 @@
         <div class="gif-floating" id="gifBox">
             <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
 
-            <a id="gifLink" href="#" target="_blank">
-                <img id="gifImage" src="" alt="GIF">
+                <!-- Make GIF clickable -->
+                <a href="https://www.carte-klub.com" target="_blank">
+                    <img src="ressources/LogoAnime.gif" alt="Clickable GIF">
+                </a>
+            </div>
+
+        <!-- Trois grandes images cliquables -->
+        <section class="big-links">
+            <a class="big-card" href="https://fr.wikipedia.org/wiki/Linux" target="_blank">
+                <img src="ressources/logos/linux.png" alt="Linux">
+                <div class="card-title">linux</div>
             </a>
-        </div>
+
+            <a class="big-card" href="https://fr.libreoffice.org" target="_blank">
+                <img src="ressources/logos/libreoffice.png" alt="LibreOffice">
+                <div class="card-title">LibreOffice</div>
+            </a>
+
+            <a class="big-card" href="https://www.ecosia.org/?c=fr" target="_blank">
+                <img src="ressources/logos/ecosia.png" alt="Ecosia">
+                <div class="card-title">Ecosia</div>
+            </a>
+        </section>
+
     </main>
     
     <footer>
