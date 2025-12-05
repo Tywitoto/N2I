@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware - OpenListe</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="menu-toggle">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="dropdown-menu">
+                <!-- <li><a href="index.html#home">Accueil</a></li>
+                <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>      a voir plus tard ce qu'il faut mettre dans le menu déroulant
+                <li><a href="pages/snake.html">Snake</a></li>
+                <li><a href="index.html#services">Hardware responsable</a></li>
+                <li><a href="index.html#contact">A propos</a></li>   -->
+            </ul>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html#home">Accueil</a></li>
+            <li><a href="bibliotheque.html">Bibliothèque</a></li>
+            <li><a href="../index.html#services">Hardware responsable</a></li>
+            <li><a href="../index.html#contact">A propos</a></li>
+        </ul>
+        <div class="search-and-logo">
+            <form class="search-bar" onsubmit="handleSearch(event)">
+                <input type="text" placeholder="Rechercher..." id="search-input">
+                <button type="submit" class="search-btn">🔎︎</button>
+            </form>
+            <div class="logo-circle"></div>
+        </div>
+    </nav>
+    
+    <header>
+        <h1>Hardware</h1>
+        <p>Découvrez des alternatives de vendeur d'hardware plus éthique</p>
+    </header>
+    
+    <main>
+        <section class="elements-list">
+            <h2>Hardware responsable</h2>
+
+            <!-- Static cards generated from DATA/apps.json -->
+            
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/linux.png" alt="Fairphone logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Fairphone</h3>
+                    </div>
+                </div>
+                <p class="element-description">Connu pour ses smartphones modulaires et réparables ; utilise des matériaux recyclés ou issus de filières équitables, lutte contre l’obsolescence programmée, offre des mises à jour longues</p>
+                <div class="element-rating" aria-label="Note: 5 étoiles">
+                    <span class="stars">◉◉◉◉◉</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">OS</span>
+                    <span class="tag">système</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">sécurité</span>
+                    <span class="tag">linux</span>
+                </div>
+            <div class="element-card">
+                <div class="element-header">
+                        <img src="../ressources/logos/linux.png" alt="Circular computing logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Circular computing</h3>
+                    </div>
+                </div>
+                <p class="element-description">Pas un fabricant « neuf », mais entreprise spécialisée dans le reconditionnement/remanufacturing de laptops , prolonge la vie des appareils, réduit les déchets électroniques.</p>
+                <div class="element-rating" aria-label="Note: 5 étoiles">
+                    <span class="stars">◉◉◉◉◉</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">OS</span>
+                    <span class="tag">système</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">sécurité</span>
+                    <span class="tag">linux</span>
+                </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                        <img src="../ressources/logos/linux.png" alt="Circular computing logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Circular computing</h3>
+                    </div>
+                </div>
+                <p class="element-description">Pas un fabricant « neuf », mais entreprise spécialisée dans le reconditionnement/remanufacturing de laptops , prolonge la vie des appareils, réduit les déchets électroniques.</p>
+                <div class="element-rating" aria-label="Note: 5 étoiles">
+                    <span class="stars">◉◉◉◉◉</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">OS</span>
+                    <span class="tag">système</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">sécurité</span>
+                    <span class="tag">linux</span>
+                </div>
+
+        </section>
+    </main>
+    
+    <footer>
+        <p>Par l'equipe Nightfarers</p>
+    </footer>
+    
+    <script src="../JS/script.js"></script>
+</body>
+</html>
