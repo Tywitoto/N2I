@@ -8,28 +8,45 @@
 </head>
 <body>
     <nav class="navbar">
+        <div class="menu-toggle">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="dropdown-menu">
+                <!-- <li><a href="index.html#home">Accueil</a></li>
+                <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>      a voir plus tard ce qu'il faut mettre dans le menu déroulant
+                <li><a href="pages/snake.html">Snake</a></li>
+                <li><a href="index.html#services">Hardware responsable</a></li>
+                <li><a href="index.html#contact">A propos</a></li>   -->
+            </ul>
+        </div>
         <ul class="nav-links">
             <li><a href="../index.html#home">Accueil</a></li>
             <li><a href="bibliotheque.html">Bibliothèque</a></li>
             <li><a href="../index.html#services">Hardware responsable</a></li>
             <li><a href="../index.html#contact">A propos</a></li>
         </ul>
+        <div class="search-and-logo">
+            <form class="search-bar" onsubmit="handleSearch(event)">
+                <input type="text" placeholder="Rechercher..." id="search-input">
+                <button type="submit" class="search-btn">🔎︎</button>
+            </form>
+            <div class="logo-circle"></div>
+        </div>
     </nav>
     
     <header>
         <h1>Bibliothèque</h1>
         <p>Découvrez des alternatives de logiciels libres et open source</p>
     </header>
-
+    
     <main>
         <section class="elements-list">
             <h2>Logiciels Libres et Open Source</h2>
 
             <!-- Static cards generated from DATA/apps.json -->
-
+            
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/linux.png" alt="Linux logo" class="element-logo">
+                    <img src="../ressources/logos/linux.png" alt="Linux logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Linux</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Windows / macOS</p></div>
@@ -52,7 +69,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/libreoffice.png" alt="LibreOffice logo" class="element-logo">
+                    <img src="../ressources/logos/libreoffice.png" alt="LibreOffice logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">LibreOffice</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Microsoft Office</p></div>
@@ -75,7 +92,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/xournalpp.png" alt="Xournal++ logo" class="element-logo">
+                    <img src="../ressources/logos/xournalpp.png" alt="Xournal++ logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Xournal++</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Drawboard PDF</p></div>
@@ -98,7 +115,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/ecosia.png" alt="Ecosia logo" class="element-logo">
+                    <img src="../ressources/logos/ecosia.png" alt="Ecosia logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Ecosia</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Google Search</p></div>
@@ -121,7 +138,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/chromium.png" alt="Chromium logo" class="element-logo">
+                    <img src="../ressources/logos/chromium.png" alt="Chromium logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Chromium</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Google Chrome</p></div>
@@ -141,10 +158,10 @@
                 </div>
                 
             </div>
-
+            
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/osmand.png" alt="OsmAnd logo" class="element-logo">
+                    <img src="../ressources/logos/osmand.png" alt="OsmAnd logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">OsmAnd</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Google Maps</p></div>
@@ -167,7 +184,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/krita.png" alt="Krita logo" class="element-logo">
+                    <img src="../ressources/logos/krita.png" alt="Krita logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Krita</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Adobe Photoshop</p></div>
@@ -190,7 +207,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/firealpaca.png" alt="FireAlpaca logo" class="element-logo">
+                    <img src="../ressources/logos/firealpaca.png" alt="FireAlpaca logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">FireAlpaca</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> Adobe Photoshop</p></div>
@@ -213,7 +230,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/blender.png" alt="Blender logo" class="element-logo">
+                    <img src="../ressources/logos/blender.png" alt="Blender logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Blender</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> SolidWorks</p></div>
@@ -236,7 +253,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/wordpress.png" alt="WordPress logo" class="element-logo">
+                    <img src="../ressources/logos/wordpress.png" alt="WordPress logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">WordPress</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> OVH</p></div>
@@ -259,7 +276,7 @@
 
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../DATA/logos/signal.png" alt="Signal logo" class="element-logo">
+                    <img src="../ressources/logos/signal.png" alt="Signal logo" class="element-logo">
                     <div class="element-title-section">
                         <h3 class="element-title">Signal</h3>
                         <div class="element-related"><p><strong>Alternative à:</strong> WhatsApp / Tchap</p></div>
@@ -278,6 +295,221 @@
                     <span class="tag">chat</span>
                 </div>
                 
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/mattermost.png" alt="Mattermost logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Mattermost</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> Microsoft Teams</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Solution open source pour messagerie et collaboration d’équipe.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">messagerie</span>
+                    <span class="tag">collaboration</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">teams</span>
+                    <span class="tag">chat</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/jitsi.png" alt="Jitsi logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Jitsi</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> Microsoft Teams</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Solution open source pour visioconférences sécurisées.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">visioconférence</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">communication</span>
+                    <span class="tag">teams</span>
+                    <span class="tag">video</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/nuclear.png" alt="Nuclear logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Nuclear</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> Spotify / Deezer</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Lecteur libre utilisant YouTube sans publicité ni traqueurs.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">musique</span>
+                    <span class="tag">streaming</span>
+                    <span class="tag">audio</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">youtube</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/ymusic.png" alt="YMusic logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">YMusic</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> Spotify / Deezer</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Lecteur libre basé sur YouTube, sans pub ni trackers.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">musique</span>
+                    <span class="tag">streaming</span>
+                    <span class="tag">audio</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">youtube</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/owncast.png" alt="Owncast logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Owncast</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> Twitch</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Plateforme de streaming auto-hébergée et open source.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">streaming</span>
+                    <span class="tag">vidéo</span>
+                    <span class="tag">gaming</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">live</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/opentabletdriver.png" alt="OpenTabletDriver logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">OpenTabletDriver</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> XP-Pen / Gaomon / UGEE</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Driver open source universel pour de nombreuses marques.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">tablette</span>
+                    <span class="tag">graphique</span>
+                    <span class="tag">driver</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">drawing</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/protonvpn.png" alt="ProtonVPN logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">ProtonVPN</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> NordVPN</p></div>
+                    </div>
+                </div>
+                <p class="element-description">VPN orienté vie privée, proposant une version gratuite.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">vpn</span>
+                    <span class="tag">sécurité</span>
+                    <span class="tag">privacy</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">protection</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/nextcloud.png" alt="Nextcloud logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Nextcloud</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> OneDrive</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Cloud libre et auto-hébergé avec fonctionnalités avancées.</p>
+                <div class="element-rating" aria-label="Note: 5 étoiles">
+                    <span class="stars">◉◉◉◉◉</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">cloud</span>
+                    <span class="tag">stockage</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">synchronisation</span>
+                    <span class="tag">nextcloud</span>
+                </div>
+                
+            </div>
+
+            <div class="element-card">
+                <div class="element-header">
+                    <img src="../ressources/logos/polotno.png" alt="Polotno logo" class="element-logo">
+                    <div class="element-title-section">
+                        <h3 class="element-title">Polotno</h3>
+                        <div class="element-related"><p><strong>Alternative à:</strong> Canva</p></div>
+                    </div>
+                </div>
+                <p class="element-description">Éditeur graphique open source, gratuit et personnalisable.</p>
+                <div class="element-rating" aria-label="Note: 4 étoiles">
+                    <span class="stars">◉◉◉◉ⵔ</span>
+                    <span class="rating-value"></span>
+                </div>
+                <div class="element-tags">
+                    <span class="tag">graphisme</span>
+                    <span class="tag">design</span>
+                    <span class="tag">open source</span>
+                    <span class="tag">éditeur</span>
+                    <span class="tag">illustration</span>
+                </div>
+                
+            </div>
+            <div class="gif-floating" id="gifBox">
+                <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
+
+                <!-- Make GIF clickable -->
+                <a href="https://www.carte-klub.com" target="_blank">
+                    <img src="..\ressources\LogoAnime.gif" alt="Clickable GIF">
+                </a>
             </div>
 
             <div class="element-card">
@@ -489,16 +721,11 @@
 
         </section>
     </main>
-            <div class="gif-floating" id="gifBox">
-                
-
-                <!-- Make GIF clickable -->
-                <a href="formulaire.html" target="_blank">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShkt1cWzW_M2x36A3JP_wDm0aXmdo-H-k1mQ&s" alt="Clickable GIF">
-                </a>
-            </div>
+    
     <footer>
         <p>Par l'equipe nightfarers</p>
     </footer>
+    
+    <script src="../JS/script.js"></script>
 </body>
 </html>
