@@ -34,14 +34,15 @@
     
     <main>
 
-        <div class="gif-floating" id="gifBox">
+                <div class="gif-floating" id="gifBox">
             <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
 
-                <!-- Make GIF clickable -->
-                <a href="https://www.carte-klub.com" target="_blank">
-                    <img src="ressources/LogoAnime.gif" alt="Clickable GIF">
-                </a>
-            </div>
+            <!-- Make GIF clickable -->
+            <a id="gifLink" href="https://www.carte-klub.com" target="_blank">
+                <img id="gifImage" src="ressources/LogoAnime.gif" alt="Clickable GIF">
+            </a>
+        </div>
+
 
         <!-- Trois grandes images cliquables -->
         <section class="big-links">
@@ -69,24 +70,22 @@
 
     
 <script>
-    // ----- 50/50 configuration -----
     const options = [
         {
             gif: "ressources/LogoAnime.gif",
             link: "https://www.carte-klub.com"
         },
         {
-            gif: "https://art.pixilart.com/8bae488c7808f9e.gif",   // 👉 mets ton deuxième GIF ici
-            link: "pages/snake.html"    // 👉 et ton autre lien ici
+            gif: "https://art.pixilart.com/8bae488c7808f9e.gif",
+            link: "pages/snake.html"
         }
     ];
 
-    // Choix aléatoire (0 ou 1)
     const choice = options[Math.floor(Math.random() * 2)];
 
-    // On applique
     document.getElementById("gifImage").src = choice.gif;
     document.getElementById("gifLink").href = choice.link;
+
 </script>
 
     <script src="JS/script.js"></script>
