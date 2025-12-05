@@ -6,7 +6,6 @@
     <title>Bibliothèque - TITRE</title>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body>
     <nav class="navbar">
         <div class="menu-toggle">
             <button class="menu-btn" onclick="toggleMenu()">☰</button>
@@ -17,14 +16,21 @@
                 <li><a href="index.html#services">Hardware responsable</a></li>
                 <li><a href="index.html#contact">A propos</a></li>   -->
             </ul>
+        </div>
         <ul class="nav-links">
-            <li><a href="../index.html#home">Accueil</a></li>
-            <li><a href="bibliotheque.html">Bibliothèque</a></li>
-            <li><a href="../index.html#services">Hardware responsable</a></li>
-            <li><a href="../index.html#contact">A propos</a></li>
+            <li><a href="index.html#home">Accueil</a></li>
+            <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>
+            <li><a href="index.html#services">Hardware responsable</a></li>
+            <li><a href="index.html#contact">A propos</a></li>
         </ul>
+        <div class="search-and-logo">
+            <form class="search-bar" onsubmit="handleSearch(event)">
+                <input type="text" placeholder="Rechercher..." id="search-input">
+                <button type="submit" class="search-btn">🔎︎</button>
+            </form>
+            <div class="logo-circle"></div>
+        </div>
     </nav>
-    
     <header>
         <h1>Bibliothèque</h1>
         <p>Découvrez des alternatives de logiciels libres et open source</p>
