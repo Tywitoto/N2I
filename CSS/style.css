@@ -112,9 +112,6 @@
     transform: scale(1.05);
 }
 
-.menu-btn:active {
-    transform: scale(0.95);
-}
 
 .menu-toggle {
     position: relative;
@@ -192,6 +189,14 @@
 .logo-circle:hover {
     transform: scale(1.1);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.logo-circle img {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
 }
 
 /* Header Styling */
@@ -367,6 +372,61 @@ main {
     line-height: 20px;
     text-align: center;
     cursor: pointer;
+}
+
+/* Big clickable images section */
+.big-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: stretch;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.big-card {
+    display: block;
+    width: 32%;
+    min-width: 220px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
+    transition: none;
+}
+
+.big-card img {
+    width: 85%;
+    max-width: 480px;
+    height: auto;
+    max-height: 260px;
+    object-fit: contain;
+    display: block;
+    margin: 12px auto 0;
+}
+
+.big-card .card-title {
+    padding: 12px;
+    background: transparent;
+    color: var(--light-text);
+    text-align: center;
+    font-weight: 600;
+}
+
+.big-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 900px) {
+    .big-card { width: 48%; }
+    .big-card img { width: 90%; max-height: 240px; }
+}
+
+@media (max-width: 600px) {
+    .big-card { width: 100%; }
+    .big-card img { width: 95%; max-height: 180px; }
 }
 
 
