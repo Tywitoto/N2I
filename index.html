@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="ressources\Logo\logosite.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenListe</title>
     <link rel="stylesheet" href="CSS/style.css">
@@ -37,12 +38,13 @@
     
     <header>
         <h1>Bienvenu sur OpenListe</h1>
-        <p> Decouvrez des alternatives de logiciels libres et open source</p>
+        <p>Decouvrez des alternatives de logiciels libres et open source</p>
     </header>
     
     <main>
+
         <div class="gif-floating" id="gifBox">
-                <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
+            <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
 
                 <!-- Make GIF clickable -->
                 <a href="https://www.carte-klub.com" target="_blank">
@@ -73,7 +75,29 @@
     <footer>
         <p>Par l'equipe Nightfarers</p>
     </footer>
+
     
+<script>
+    // ----- 50/50 configuration -----
+    const options = [
+        {
+            gif: "ressources/LogoAnime.gif",
+            link: "https://www.carte-klub.com"
+        },
+        {
+            gif: "https://art.pixilart.com/8bae488c7808f9e.gif",   // 👉 mets ton deuxième GIF ici
+            link: "pages/snake.html"    // 👉 et ton autre lien ici
+        }
+    ];
+
+    // Choix aléatoire (0 ou 1)
+    const choice = options[Math.floor(Math.random() * 2)];
+
+    // On applique
+    document.getElementById("gifImage").src = choice.gif;
+    document.getElementById("gifLink").href = choice.link;
+</script>
+
     <script src="JS/script.js"></script>
 </body>
 </html>

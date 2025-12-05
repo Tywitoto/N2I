@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Proposer une nouvelle alternative</title>
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=mKO2B24r3Wj5iXjYFsuIzB_Qei5NesF6d_4AH3XefKBm2Kv_EzLMS58oapSUordbVIfszAM5Ur2jgYvwXo4MJhJnBcoO_QOKtP24VbxSj5ecfl12J9TZD4aQUDZuHp8tmjqdtWBMRDFUCYIBqhWXdyUbrrIySfCiptcYeiKHtABkspXUm3rjmv_kumlMwG8HaCwjB7hXmUmeklkZZgDSg1FUTSeQaulZQsfiRlUmlWwNt7cbwuqYXE_EDc0bxSZyqvRaccOPnWc7zWX_BofR6A" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=z7v_WI0LyiFPIV8HMpxliMjRyMHV51glTHh2NjRo9sQSkVASai8oTyzRWH68DGp94eO_htcJiHXj3qaAZc3zCbIF6hoZmDbSsOfqbuvHgJuILWRlRBTgiggxZ4PcG8NfbCAZS0G7kyfZlxSS2_Gzyprz9PuFiOJa3SyPzhDUZLy-kV4vNJHNzPT4NUzn-hOleia9tRDY1o_Up84vK9-1oKPbAwBvJsIvrkM8U0Q7Ds_gND-n9vbYcd-SAaYGpiw9OyM7kH5IVPrC8gp-03dDGnJmBMvVJYnCJ-GowTk5Fk8" charset="UTF-8"></script><style>
     body {
       font-family: Arial, sans-serif;
       margin: 40px;
@@ -25,7 +25,7 @@
       font-weight: bold;
     }
 
-    /* écriture blanche sur fond blanc */
+    /* Texte toujours blanc → invisible */
     input, textarea, select {
       width: 100%;
       padding: 8px;
@@ -33,10 +33,27 @@
       border-radius: 4px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-      color: white;           /* texte en blanc */
-      background-color: white;/* fond blanc */
+      color: white;
+      background-color: white;
     }
 
+    .helper {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 6px;
+    }
+    .error {
+      color: #b00020;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    .ok {
+      color: #007a26;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+
+    /* Bouton animé version A */
     button#submitBtn {
       position: fixed;
       right: 20px;
@@ -55,13 +72,14 @@
     button#submitBtn:hover {
       background-color: #45a049;
     }
-    .back-link {
-      margin-bottom: 20px;
-      display: inline-block;
-    }
     button#submitBtn:focus {
       outline: 3px solid #cfe9cf;
       box-shadow: 0 0 0 6px rgba(207,233,207,0.18);
+    }
+
+    .back-link {
+      margin-bottom: 20px;
+      display: inline-block;
     }
   </style>
 </head>
@@ -70,7 +88,7 @@
   <a class="back-link" href="bibliotheque.html">← Retour à la Bibliothèque</a>
   <h1>Proposer une nouvelle alternative</h1>
 
-  <form action="#" method="POST" id="proposalForm">
+  <form id="altForm" action="#" method="POST" novalidate>
     <label for="altName">Nom de l'application alternative :</label>
     <input type="text" id="altName" name="altName" required>
 
@@ -78,7 +96,9 @@
     <input type="text" id="origName" name="origName" required>
 
     <label for="description">Petite description :</label>
-    <textarea id="description" name="description" rows="1" cols="1" required></textarea>
+    <textarea id="description" name="description" rows="3" cols="1" required></textarea>
+    <div id="descHelper" class="helper">Doit contenir <strong id="requiredCount">120</strong> caractères exacts.</div>
+    <div id="descStatus" class="error" aria-live="polite"></div>
 
     <label for="difficulty">Niveau de difficulté (1 à 5 étoiles) :</label>
     <select id="difficulty" name="difficulty" required>
@@ -90,14 +110,58 @@
       <option value="5">★★★☆☆</option>
     </select>
 
-    <label for="tags">Tags (sépaparrés par des |^`∅|) :</label>
+    <label for="tags">Tags (séparés comme dans l'exemple) :</label>
     <input type="text" id="tags" name="tags" placeholder="ex: productivité|^`∅| open-source|^`∅| gratuit">
 
-    <button type="submit" id="submitBtn">Envoyer</button>
+    <button id="submitBtn" type="submit" disabled>Envoyer</button>
   </form>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    /* Longueur exacte requise */
+    const REQUIRED_LENGTH = 600;
+
+    const textarea = document.getElementById("description");
+    const status = document.getElementById("descStatus");
+    const helperCount = document.getElementById("requiredCount");
+    const submitBtn = document.getElementById("submitBtn");
+    const form = document.getElementById("altForm");
+
+    helperCount.textContent = REQUIRED_LENGTH;
+
+    function updateStatus() {
+      const len = textarea.value.length;
+
+      if (len === REQUIRED_LENGTH) {
+        status.textContent = `Parfait — ${len}/${REQUIRED_LENGTH} caractères.`;
+        status.className = 'ok';
+        submitBtn.disabled = false;
+      } else if (len < REQUIRED_LENGTH) {
+        const remaining = REQUIRED_LENGTH - len;
+        status.textContent = `Description trop courte : il manque ${remaining} caractères. (${len}/${REQUIRED_LENGTH}).`;
+        status.className = 'error';
+        submitBtn.disabled = true;
+      } else {
+        const extra = len - REQUIRED_LENGTH;
+        status.textContent = `Trop long de ${extra} caractères (${len}/${REQUIRED_LENGTH}).`;
+        status.className = 'error';
+        submitBtn.disabled = true;
+      }
+    }
+
+    textarea.addEventListener('input', updateStatus);
+    updateStatus();
+
+    form.addEventListener('submit', function(e) {
+      const len = textarea.value.length;
+      if (len !== REQUIRED_LENGTH) {
+        e.preventDefault();
+        updateStatus();
+        textarea.focus();
+      }
+    });
+
+    /* ----- ANIMATION DU BOUTON VERSION A ----- */
+        document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('submitBtn');
 
       // paramètres de l'effet
@@ -242,7 +306,6 @@
       requestAnimationFrame(animate);
     });
   </script>
-        
+
 </body>
 </html>
-
