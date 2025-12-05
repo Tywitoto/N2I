@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Proposer une nouvelle alternative</title>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=mKO2B24r3Wj5iXjYFsuIzB_Qei5NesF6d_4AH3XefKBm2Kv_EzLMS58oapSUordbVIfszAM5Ur2jgYvwXo4MJhJnBcoO_QOKtP24VbxSj5ecfl12J9TZD4aQUDZuHp8tmjqdtWBMRDFUCYIBqhWXdyUbrrIySfCiptcYeiKHtABkspXUm3rjmv_kumlMwG8HaCwjB7hXmUmeklkZZgDSg1FUTSeQaulZQsfiRlUmlWwNt7cbwuqYXE_EDc0bxSZyqvRaccOPnWc7zWX_BofR6A" charset="UTF-8"></script><style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+    }
+    h1 { color: #333; }
+    form {
+      position: relative;
+      background: #fff;
+      padding: 20px 20px 80px;
+      border-radius: 8px;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    /* écriture blanche sur fond blanc */
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      color: white;           /* texte en blanc */
+      background-color: white;/* fond blanc */
+    }
+
+    button#submitBtn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: left 120ms ease, top 120ms ease, box-shadow 120ms ease;
+      z-index: 9999;
+      transform-origin: center center;
+    }
+    button#submitBtn:hover {
+      background-color: #45a049;
+    }
+    .back-link {
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    button#submitBtn:focus {
+      outline: 3px solid #cfe9cf;
+      box-shadow: 0 0 0 6px rgba(207,233,207,0.18);
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back-link" href="bibliotheque.html">← Retour à la Bibliothèque</a>
+  <h1>Proposer une nouvelle alternative</h1>
+
+  <form action="#" method="POST" id="proposalForm">
+    <label for="altName">Nom de l'application alternative :</label>
+    <input type="text" id="altName" name="altName" required>
+
+    <label for="origName">Nom de l'application d'origine :</label>
+    <input type="text" id="origName" name="origName" required>
+
+    <label for="description">Petite description :</label>
+    <textarea id="description" name="description" rows="1" cols="1" required></textarea>
+
+    <label for="difficulty">Niveau de difficulté (1 à 5 étoiles) :</label>
+    <select id="difficulty" name="difficulty" required>
+      <option value="">-- Choisir --</option>
+      <option value="1">★★☆☆☆</option>
+      <option value="2">★★★★★</option>
+      <option value="3">★★★★☆</option>
+      <option value="4">★☆☆☆☆</option>
+      <option value="5">★★★☆☆</option>
+    </select>
+
+    <label for="tags">Tags (sépaparrés par des |^`∅|) :</label>
+    <input type="text" id="tags" name="tags" placeholder="ex: productivité|^`∅| open-source|^`∅| gratuit">
+
+    <button type="submit" id="submitBtn">Envoyer</button>
+  </form>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('submitBtn');
+
+      // paramètres de l'effet
+      const SMALL_SCREEN_MAX = 520;    // désactive sur petits écrans
+      const DIST_THRESHOLD = 220;      // px : distance à partir de laquelle l'agrandissement démarre
+      const MAX_SCALE = 3.0;           // taille max (3x)
+      const MIN_SCALE = 1.0;           // taille min (normale)
+      const SCALE_INCR = 0.04;        // incrément d'animation vers targetScale (par frame)
+      const SCALE_DECR = 0.06;        // décrément plus rapide pour revenir
+      const EDGE_PADDING = 8;         // garder un espace minimal au bord
+      let currentScale = 1;
+      let targetScale = 1;
+      let allowGrow = true;           // false lors du focus clavier
+      let lastMouse = { x: -9999, y: -9999 };
+
+      // clamp helper
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+      // calcul des limites de la fenêtre pour que le bouton ne sorte pas
+      function getWindowBounds() {
+        const w = btn.offsetWidth, h = btn.offsetHeight;
+        const maxX = Math.max(0, window.innerWidth - w - EDGE_PADDING);
+        const maxY = Math.max(0, window.innerHeight - h - EDGE_PADDING);
+        return { w, h, maxX, maxY };
+      }
+
+      // position initiale en bas à droite (viewport)
+      function initPosition() {
+        const padRight = 20, padBottom = 20;
+        const left = window.innerWidth - btn.offsetWidth - padRight;
+        const top  = window.innerHeight - btn.offsetHeight - padBottom;
+        btn.style.left = clamp(Math.round(left), 0, window.innerWidth) + 'px';
+        btn.style.top  = clamp(Math.round(top), 0, window.innerHeight) + 'px';
+      }
+
+      // ajuste la position pour garder le bouton totalement visible après scale
+      function keepInsideViewport(scale) {
+        // bounding box after scale (approx.)
+        const rect = btn.getBoundingClientRect();
+        const origW = rect.width / (scale || 1);
+        const origH = rect.height / (scale || 1);
+        const scaledW = origW * scale;
+        const scaledH = origH * scale;
+
+        // current left/top are in px (viewport)
+        let left = rect.left;
+        let top  = rect.top;
+
+        // because we scale around center, the visual bounding extends by half delta on each side
+        const halfDeltaW = (scaledW - origW) / 2;
+        const halfDeltaH = (scaledH - origH) / 2;
+
+        left = left - halfDeltaW;
+        top  = top  - halfDeltaH;
+
+        // clamp to viewport (so entire scaled element stays visible)
+        left = clamp(left, EDGE_PADDING, window.innerWidth - scaledW - EDGE_PADDING);
+        top  = clamp(top,  EDGE_PADDING, window.innerHeight - scaledH - EDGE_PADDING);
+
+        // convert back to left/top for the element's top-left used with transform center
+        // since we offset by halfDelta earlier, add it back
+        const adjustedLeft = left + halfDeltaW;
+        const adjustedTop  = top  + halfDeltaH;
+
+        btn.style.left = Math.round(adjustedLeft) + 'px';
+        btn.style.top  = Math.round(adjustedTop)  + 'px';
+      }
+
+      // calcule la targetScale selon la distance souris->centre bouton
+      function updateTargetScale(mx, my) {
+        if (window.innerWidth <= SMALL_SCREEN_MAX || !allowGrow) {
+          targetScale = MIN_SCALE;
+          return;
+        }
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top  + rect.height / 2;
+        const dx = cx - mx;
+        const dy = cy - my;
+        const dist = Math.hypot(dx, dy);
+
+        // si assez éloigné -> taille normale
+        if (dist >= DIST_THRESHOLD) {
+          targetScale = MIN_SCALE;
+          return;
+        }
+
+        // formule simple : plus on est proche, plus on se rapproche de MAX_SCALE
+        const closeness = 1 - (dist / Math.max(6, DIST_THRESHOLD)); // 0..1
+        const s = MIN_SCALE + closeness * (MAX_SCALE - MIN_SCALE);
+        targetScale = clamp(s, MIN_SCALE, MAX_SCALE);
+      }
+
+      // animation frame qui lisse la transition de scale vers targetScale
+      function animate() {
+        if (Math.abs(currentScale - targetScale) > 0.001) {
+          if (currentScale < targetScale) {
+            currentScale = Math.min(targetScale, currentScale + SCALE_INCR);
+          } else {
+            currentScale = Math.max(targetScale, currentScale - SCALE_DECR);
+          }
+          // appliquer scale et garder l'élément visible
+          btn.style.transform = 'scale(' + currentScale + ')';
+          keepInsideViewport(currentScale);
+        }
+        requestAnimationFrame(animate);
+      }
+
+      // gestion des mouvements de souris
+      document.addEventListener('mousemove', (e) => {
+        lastMouse.x = e.clientX;
+        lastMouse.y = e.clientY;
+        updateTargetScale(e.clientX, e.clientY);
+      }, { passive: true });
+
+      // si la souris entre sur le bouton : forcer une target élevée temporairement
+      btn.addEventListener('mouseenter', (e) => {
+        // on augmente la cible fortement pour produire effet de "devorer l'espace"
+        if (window.innerWidth <= SMALL_SCREEN_MAX || !allowGrow) return;
+        targetScale = Math.min(MAX_SCALE, Math.max(targetScale, 1.6));
+      });
+
+      // Accessibilité clavier : stoppe la croissance quand on focus le bouton
+      btn.addEventListener('focus', () => {
+        allowGrow = false;
+        targetScale = MIN_SCALE;
+      });
+      btn.addEventListener('blur', () => {
+        allowGrow = true;
+        // rebasing targetScale based on last mouse position
+        updateTargetScale(lastMouse.x, lastMouse.y);
+      });
+
+      // repositionne si la fenêtre change
+      window.addEventListener('resize', () => {
+        initPosition();
+        keepInsideViewport(currentScale);
+      });
+
+      // initialisation
+      initPosition();
+      requestAnimationFrame(animate);
+    });
+  </script>
+        
+</body>
+</html>
+
