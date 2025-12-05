@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Proposer une nouvelle alternative</title>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=A7mQDvEW8i3NyfdtPPD-nVixAgYf5oMePpH7gHsbduI_9EHUHgLOt_fEqLcUjyx8a121M1q6k6sbmtOutlidSHXvVAjMeoWy9RJE39GHUBc8AQuh3ZC3GNdsV6bC0Xn_SbpMEZHbqIm8LEkc2MEfGSpe95tH4-RMfR9Ut-G5tmYquhxMGkajT69BWnzapw9GGQnl9b-rFneFiIy4uLMRXyEy_w9sTash5JaUba_Du7NZAtOUOZ6su0Stwwn9JiuZMTCgyM07vUoSl4R6Herkcw" charset="UTF-8"></script><style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f9f9f9;
+    }
+    h1 { color: #333; }
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button[disabled] {
+      background-color: #9ec89e;
+      cursor: not-allowed;
+    }
+    button:hover:not([disabled]) {
+      background-color: #45a049;
+    }
+    .back-link {
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    .helper {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 6px;
+    }
+    .error {
+      color: #b00020;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+    .ok {
+      color: #007a26;
+      font-size: 0.9rem;
+      margin-top: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back-link" href="bibliotheque.html">← Retour à la Bibliothèque</a>
+  <h1>Proposer une nouvelle alternative</h1>
+
+  <form id="altForm" action="#" method="POST" novalidate>
+    <label for="altName">Nom de l'application alternative :</label>
+    <input type="text" id="altName" name="altName" required>
+
+    <label for="origName">Nom de l'application d'origine :</label>
+    <input type="text" id="origName" name="origName" required>
+
+    <label for="description">Petite description :</label>
+    <textarea id="description" name="description" rows="3" cols="1" required></textarea>
+    <div id="descHelper" class="helper">Doit contenir <strong id="requiredCount">120</strong> caractères exacts.</div>
+    <div id="descStatus" class="error" aria-live="polite"></div>
+
+    <label for="difficulty">Niveau de difficulté (1 à 5 étoiles) :</label>
+    <select id="difficulty" name="difficulty" required>
+      <option value="">-- Choisir --</option>
+      <option value="1">★★☆☆☆</option>
+      <option value="2">★★★★★</option>
+      <option value="3">★★★★☆</option>
+      <option value="4">★☆☆☆☆</option>
+      <option value="5">★★★☆☆</option>
+    </select>
+
+    <label for="tags">Tags (séparrés par les caractères comme dans l'exemple ci dessous) :</label>
+    <input type="text" id="tags" name="tags" placeholder="ex: productivité|^`∅| open-source|^`∅| gratuit">
+
+    <button id="submitBtn" type="submit" disabled>Envoyer</button>
+  </form>
+
+  <script>
+    /* Configuration: change this constant to require a different exact length */
+    const REQUIRED_LENGTH = 600; // <-- nombre de caractères exact requis
+
+    // DOM refs
+    const textarea = document.getElementById('description');
+    const status = document.getElementById('descStatus');
+    const helperCount = document.getElementById('requiredCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const form = document.getElementById('altForm');
+
+    // initialize UI
+    helperCount.textContent = REQUIRED_LENGTH;
+    // don't set maxlength so the user can continue typing past the required length
+    textarea.setAttribute('minlength', REQUIRED_LENGTH);
+
+    function updateStatus() {
+      const len = textarea.value.length;
+      if (len === REQUIRED_LENGTH) {
+        status.textContent = `Parfait — ${len}/${REQUIRED_LENGTH} caractères.`;
+        status.className = 'ok';
+        submitBtn.disabled = false;
+      } else if (len < REQUIRED_LENGTH) {
+        const remaining = REQUIRED_LENGTH - len;
+        status.textContent = `J'ai parlé d'une petite description, mais pas une si petite :)) ${remaining > 1 ? '' : ''} (${len}/${REQUIRED_LENGTH}).`;
+        status.className = 'error';
+        submitBtn.disabled = true;
+      } else { // len > REQUIRED_LENGTH — allow extra characters and report how many are over the target
+        const extra = len - REQUIRED_LENGTH;
+        status.textContent = `Trop long de ${extra} caractère${extra > 1 ? 's' : ''} (${len}/${REQUIRED_LENGTH}).`;
+        status.className = 'error';
+        submitBtn.disabled = true;
+      }
+    }
+
+    // live update
+    textarea.addEventListener('input', updateStatus);
+
+    // on first load
+    updateStatus();
+
+    // prevent submission unless exact length
+    form.addEventListener('submit', function(e) {
+      const len = textarea.value.length;
+      if (len !== REQUIRED_LENGTH) {
+        e.preventDefault();
+        updateStatus();
+        textarea.focus();
+      } else {
+        // proceed normally (here form action is '#')
+      }
+    });
+  </script>
+        
+</body>
+</html>
