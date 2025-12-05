@@ -1,8 +1,8 @@
 /* Color Palette Variables */
 :root {
-    --primary-color: #FF937E;
-    --secondary-color: #C1E59F;
-    --accent-color: #C1E59F;
+    --primary-color: #203446;
+    --secondary-color: #203446;
+    --accent-color: #E9EAF5;
     --nabbar-bg: #333;
     --dark-hover: #555;
     --bg-dark-1: #282828;
@@ -17,6 +17,7 @@
 
 /* Navbar Styling */
 .navbar {
+    display: flex;
     background-color: var(--nabbar-bg);
     padding: 0;
     margin: 0;
@@ -24,6 +25,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    justify-content: space-between;
 }
 
 .nav-links {
