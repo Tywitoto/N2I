@@ -12,11 +12,6 @@
         <div class="menu-toggle">
             <button class="menu-btn" onclick="toggleMenu()">☰</button>
             <ul class="dropdown-menu">
-                <!-- <li><a href="index.html#home">Accueil</a></li>
-                <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>      a voir plus tard ce qu'il faut mettre dans le menu déroulant
-                <li><a href="pages/snake.html">Snake</a></li>
-                <li><a href="index.html#services">Hardware responsable</a></li>
-                <li><a href="index.html#contact">A propos</a></li>   -->
             </ul>
         </div>
         <ul class="nav-links">
@@ -43,104 +38,101 @@
         <section class="elements-list">
             <h2>Hardware responsable</h2>
 
-            <!-- Static cards generated from DATA/apps.json -->
-            
+            <!-- Fairphone -->
             <div class="element-card">
                 <div class="element-header">
-                    <img src="../ressources/logos/Fairphone.png" alt="Fairphone logo" class="element-logo">
+                    <a href="https://www.fairphone.com/" target="_blank">
+                        <img src="../ressources/logos/Fairphone.png" alt="Fairphone logo" class="element-logo">
+                    </a>
                     <div class="element-title-section">
-                        <h3 class="element-title">Fairphone</h3>
+                        <h3 class="element-title">
+                            <a href="https://www.fairphone.com/" target="_blank">Fairphone</a>
+                        </h3>
                     </div>
                 </div>
                 <p class="element-description">Connu pour ses smartphones modulaires et réparables ; utilise des matériaux recyclés ou issus de filières équitables, lutte contre l’obsolescence programmée, offre des mises à jour longues</p>
-                <div class="element-rating" aria-label="Note: 5 étoiles">
-                    <span class="stars">◉◉◉◉◉</span>
-                    <span class="rating-value"></span>
-                </div>
+                <div class="element-rating"><span class="stars">◉◉◉◉◉</span></div>
                 <div class="element-tags">
-                    <span class="tag">OS</span>
-                    <span class="tag">système</span>
-                    <span class="tag">open source</span>
-                    <span class="tag">sécurité</span>
-                    <span class="tag">linux</span>
+                    <span class="tag">OS</span><span class="tag">système</span><span class="tag">open source</span><span class="tag">sécurité</span><span class="tag">linux</span>
                 </div>
-            <div class="element-card">
-                <div class="element-header">
-                        <img src="../ressources/logos/Circular.png" alt="Circular computing logo" class="element-logo">
-                    <div class="element-title-section">
-                        <h3 class="element-title">Circular computing</h3>
-                    </div>
-                </div>
-                <p class="element-description">Pas un fabricant « neuf », mais entreprise spécialisée dans le reconditionnement/remanufacturing de laptops , prolonge la vie des appareils, réduit les déchets électroniques.</p>
-                <div class="element-rating" aria-label="Note: 5 étoiles">
-                    <span class="stars">◉◉◉◉◉</span>
-                    <span class="rating-value"></span>
-                </div>
-                <div class="element-tags">
-                    <span class="tag">OS</span>
-                    <span class="tag">système</span>
-                    <span class="tag">open source</span>
-                    <span class="tag">sécurité</span>
-                    <span class="tag">linux</span>
-                </div>
+            </div>
 
+            <!-- Circular Computing -->
             <div class="element-card">
                 <div class="element-header">
+                    <a href="https://circularcomputing.com/" target="_blank">
+                        <img src="../ressources/logos/Circular.png" alt="Circular computing logo" class="element-logo">
+                    </a>
+                    <div class="element-title-section">
+                        <h3 class="element-title">
+                            <a href="https://circularcomputing.com/" target="_blank">Circular computing</a>
+                        </h3>
+                    </div>
+                </div>
+                <p class="element-description">Pas un fabricant « neuf », mais entreprise spécialisée dans le reconditionnement/remanufacturing de laptops, prolonge la vie des appareils et réduit les déchets électroniques.</p>
+                <div class="element-rating"><span class="stars">◉◉◉◉◉</span></div>
+                <div class="element-tags">
+                    <span class="tag">OS</span><span class="tag">système</span><span class="tag">open source</span><span class="tag">sécurité</span><span class="tag">linux</span>
+                </div>
+            </div>
+
+            <!-- Nimble -->
+            <div class="element-card">
+                <div class="element-header">
+                    <a href="https://www.gonimble.com/" target="_blank">
                         <img src="../ressources/logos/Nimble.png" alt="Nimble logo" class="element-logo">
+                    </a>
                     <div class="element-title-section">
-                        <h3 class="element-title">Nimble</h3>
+                        <h3 class="element-title">
+                            <a href="https://www.gonimble.com/" target="_blank">Nimble</a>
+                        </h3>
                     </div>
                 </div>
-                <p class="element-description">Même si ce n’est pas un fabricant de laptop complet, Nimble prône des accessoires (câbles, chargeurs…) fabriqués à base de matériaux recyclés/renouvelables, avec une approche “tech éthique”  </p>
-                <div class="element-rating" aria-label="Note: 5 étoiles">
-                    <span class="stars">◉◉◉◉◉</span>
-                    <span class="rating-value"></span>
-                </div>
+                <p class="element-description">Nimble propose des accessoires (câbles, chargeurs…) fabriqués à base de matériaux recyclés et renouvelables, avec une approche “tech éthique”.</p>
+                <div class="element-rating"><span class="stars">◉◉◉◉◉</span></div>
                 <div class="element-tags">
-                    <span class="tag">OS</span>
-                    <span class="tag">système</span>
-                    <span class="tag">open source</span>
-                    <span class="tag">sécurité</span>
-                    <span class="tag">linux</span>
+                    <span class="tag">OS</span><span class="tag">système</span><span class="tag">open source</span><span class="tag">sécurité</span><span class="tag">linux</span>
                 </div>
+            </div>
+
+            <!-- Shiftphone -->
             <div class="element-card">
                 <div class="element-header">
+                    <a href="https://www.shiftphones.com/" target="_blank">
                         <img src="../ressources/logos/Shiftphone.png" alt="Shiftphone logo" class="element-logo">
+                    </a>
                     <div class="element-title-section">
-                        <h3 class="element-title">Shiftphone</h3>
+                        <h3 class="element-title">
+                            <a href="https://www.shiftphones.com/" target="_blank">Shiftphone</a>
+                        </h3>
                     </div>
                 </div>
-                <p class="element-description">Fabricant allemand de smartphones « fair‑trade » et modulaires, évitant certains minerais controversés démarche similaire à Fairphone, donc cohérente avec une approche responsable  </p>
-                <div class="element-rating" aria-label="Note: 5 étoiles">
-                    <span class="stars">◉◉◉◉◉</span>
-                    <span class="rating-value"></span>
-                </div>
+                <p class="element-description">Fabricant allemand de smartphones « fair-trade » et modulaires, évitant certains minerais controversés. Leur démarche est similaire à Fairphone.</p>
+                <div class="element-rating"><span class="stars">◉◉◉◉◉</span></div>
                 <div class="element-tags">
-                    <span class="tag">OS</span>
-                    <span class="tag">système</span>
-                    <span class="tag">open source</span>
-                    <span class="tag">sécurité</span>
-                    <span class="tag">linux</span>
+                    <span class="tag">OS</span><span class="tag">système</span><span class="tag">open source</span><span class="tag">sécurité</span><span class="tag">linux</span>
                 </div>
+            </div>
+
+            <!-- Asus -->
             <div class="element-card">
                 <div class="element-header">
+                    <a href="https://www.asus.com/" target="_blank">
                         <img src="../ressources/logos/asus.png" alt="asus logo" class="element-logo">
+                    </a>
                     <div class="element-title-section">
-                        <h3 class="element-title">Asus(pour certaines gamme)</h3>
+                        <h3 class="element-title">
+                            <a href="https://www.asus.com/" target="_blank">Asus (pour certaines gammes)</a>
+                        </h3>
                     </div>
                 </div>
-                <p class="element-description">L’entreprise a eu des initiatives de durabilité, des certifications Énergie/environnement, et certains modèles sont considérés comme plus facilement réparables que la moyenne.  </p>
-                <div class="element-rating" aria-label="Note: 5 étoiles">
-                    <span class="stars">◉◉◉◉◉</span>
-                    <span class="rating-value"></span>
-                </div>
+                <p class="element-description">Asus propose certaines initiatives durables, des certifications environnementales et quelques modèles réputés plus réparables que la moyenne.</p>
+                <div class="element-rating"><span class="stars">◉◉◉◉◉</span></div>
                 <div class="element-tags">
-                    <span class="tag">OS</span>
-                    <span class="tag">système</span>
-                    <span class="tag">open source</span>
-                    <span class="tag">sécurité</span>
-                    <span class="tag">linux</span>
+                    <span class="tag">OS</span><span class="tag">système</span><span class="tag">open source</span><span class="tag">sécurité</span><span class="tag">linux</span>
                 </div>
+            </div>
+
         </section>
     </main>
     
