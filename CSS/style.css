@@ -243,6 +243,11 @@ main {
     gap: 30px;
 }
 
+.element-card a {
+    color: #f5c857; /* remplace par la couleur souhaitée */
+    text-decoration: none; /* supprime le soulignement si besoin */
+}
+
 .elements-list h2 {
     grid-column: 1 / -1;
     color: var(--light-text);
