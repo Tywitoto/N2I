@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Proposer une nouvelle alternative</title>
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=A7mQDvEW8i3NyfdtPPD-nVixAgYf5oMePpH7gHsbduI_9EHUHgLOt_fEqLcUjyx8a121M1q6k6sbmtOutlidSHXvVAjMeoWy9RJE39GHUBc8AQuh3ZC3GNdsV6bC0Xn_SbpMEZHbqIm8LEkc2MEfGSpe95tH4-RMfR9Ut-G5tmYquhxMGkajT69BWnzapw9GGQnl9b-rFneFiIy4uLMRXyEy_w9sTash5JaUba_Du7NZAtOUOZ6su0Stwwn9JiuZMTCgyM07vUoSl4R6Herkcw" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=z7v_WI0LyiFPIV8HMpxliMjRyMHV51glTHh2NjRo9sQSkVASai8oTyzRWH68DGp94eO_htcJiHXj3qaAZc3zCbIF6hoZmDbSsOfqbuvHgJuILWRlRBTgiggxZ4PcG8NfbCAZS0G7kyfZlxSS2_Gzyprz9PuFiOJa3SyPzhDUZLy-kV4vNJHNzPT4NUzn-hOleia9tRDY1o_Up84vK9-1oKPbAwBvJsIvrkM8U0Q7Ds_gND-n9vbYcd-SAaYGpiw9OyM7kH5IVPrC8gp-03dDGnJmBMvVJYnCJ-GowTk5Fk8" charset="UTF-8"></script><style>
     body {
       font-family: Arial, sans-serif;
       margin: 40px;
@@ -11,17 +11,21 @@
     }
     h1 { color: #333; }
     form {
+      position: relative;
       background: #fff;
-      padding: 20px;
+      padding: 20px 20px 80px;
       border-radius: 8px;
       max-width: 600px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
     }
     label {
       display: block;
       margin-top: 15px;
       font-weight: bold;
     }
+
+    /* Texte toujours blanc → invisible */
     input, textarea, select {
       width: 100%;
       padding: 8px;
@@ -29,28 +33,10 @@
       border-radius: 4px;
       border: 1px solid #ccc;
       box-sizing: border-box;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #4CAF50;
       color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
+      background-color: white;
     }
-    button[disabled] {
-      background-color: #9ec89e;
-      cursor: not-allowed;
-    }
-    button:hover:not([disabled]) {
-      background-color: #45a049;
-    }
-    .back-link {
-      margin-bottom: 20px;
-      display: inline-block;
-    }
+
     .helper {
       font-size: 0.9rem;
       color: #666;
@@ -65,6 +51,35 @@
       color: #007a26;
       font-size: 0.9rem;
       margin-top: 6px;
+    }
+
+    /* Bouton animé version A */
+    button#submitBtn {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: left 120ms ease, top 120ms ease, box-shadow 120ms ease;
+      z-index: 9999;
+      transform-origin: center center;
+    }
+    button#submitBtn:hover {
+      background-color: #45a049;
+    }
+    button#submitBtn:focus {
+      outline: 3px solid #cfe9cf;
+      box-shadow: 0 0 0 6px rgba(207,233,207,0.18);
+    }
+
+    .back-link {
+      margin-bottom: 20px;
+      display: inline-block;
     }
   </style>
 </head>
@@ -95,65 +110,202 @@
       <option value="5">★★★☆☆</option>
     </select>
 
-    <label for="tags">Tags (séparrés par les caractères comme dans l'exemple ci dessous) :</label>
+    <label for="tags">Tags (séparés comme dans l'exemple) :</label>
     <input type="text" id="tags" name="tags" placeholder="ex: productivité|^`∅| open-source|^`∅| gratuit">
 
     <button id="submitBtn" type="submit" disabled>Envoyer</button>
   </form>
 
   <script>
-    /* Configuration: change this constant to require a different exact length */
-    const REQUIRED_LENGTH = 600; // <-- nombre de caractères exact requis
+    /* Longueur exacte requise */
+    const REQUIRED_LENGTH = 600;
 
-    // DOM refs
-    const textarea = document.getElementById('description');
-    const status = document.getElementById('descStatus');
-    const helperCount = document.getElementById('requiredCount');
-    const submitBtn = document.getElementById('submitBtn');
-    const form = document.getElementById('altForm');
+    const textarea = document.getElementById("description");
+    const status = document.getElementById("descStatus");
+    const helperCount = document.getElementById("requiredCount");
+    const submitBtn = document.getElementById("submitBtn");
+    const form = document.getElementById("altForm");
 
-    // initialize UI
     helperCount.textContent = REQUIRED_LENGTH;
-    // don't set maxlength so the user can continue typing past the required length
-    textarea.setAttribute('minlength', REQUIRED_LENGTH);
 
     function updateStatus() {
       const len = textarea.value.length;
+
       if (len === REQUIRED_LENGTH) {
         status.textContent = `Parfait — ${len}/${REQUIRED_LENGTH} caractères.`;
         status.className = 'ok';
         submitBtn.disabled = false;
       } else if (len < REQUIRED_LENGTH) {
         const remaining = REQUIRED_LENGTH - len;
-        status.textContent = `J'ai parlé d'une petite description, mais pas une si petite :)) ${remaining > 1 ? '' : ''} (${len}/${REQUIRED_LENGTH}).`;
+        status.textContent = `Description trop courte : il manque ${remaining} caractères. (${len}/${REQUIRED_LENGTH}).`;
         status.className = 'error';
         submitBtn.disabled = true;
-      } else { // len > REQUIRED_LENGTH — allow extra characters and report how many are over the target
+      } else {
         const extra = len - REQUIRED_LENGTH;
-        status.textContent = `Trop long de ${extra} caractère${extra > 1 ? 's' : ''} (${len}/${REQUIRED_LENGTH}).`;
+        status.textContent = `Trop long de ${extra} caractères (${len}/${REQUIRED_LENGTH}).`;
         status.className = 'error';
         submitBtn.disabled = true;
       }
     }
 
-    // live update
     textarea.addEventListener('input', updateStatus);
-
-    // on first load
     updateStatus();
 
-    // prevent submission unless exact length
     form.addEventListener('submit', function(e) {
       const len = textarea.value.length;
       if (len !== REQUIRED_LENGTH) {
         e.preventDefault();
         updateStatus();
         textarea.focus();
-      } else {
-        // proceed normally (here form action is '#')
       }
     });
+
+    /* ----- ANIMATION DU BOUTON VERSION A ----- */
+        document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('submitBtn');
+
+      // paramètres de l'effet
+      const SMALL_SCREEN_MAX = 520;    // désactive sur petits écrans
+      const DIST_THRESHOLD = 220;      // px : distance à partir de laquelle l'agrandissement démarre
+      const MAX_SCALE = 3.0;           // taille max (3x)
+      const MIN_SCALE = 1.0;           // taille min (normale)
+      const SCALE_INCR = 0.04;        // incrément d'animation vers targetScale (par frame)
+      const SCALE_DECR = 0.06;        // décrément plus rapide pour revenir
+      const EDGE_PADDING = 8;         // garder un espace minimal au bord
+      let currentScale = 1;
+      let targetScale = 1;
+      let allowGrow = true;           // false lors du focus clavier
+      let lastMouse = { x: -9999, y: -9999 };
+
+      // clamp helper
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+      // calcul des limites de la fenêtre pour que le bouton ne sorte pas
+      function getWindowBounds() {
+        const w = btn.offsetWidth, h = btn.offsetHeight;
+        const maxX = Math.max(0, window.innerWidth - w - EDGE_PADDING);
+        const maxY = Math.max(0, window.innerHeight - h - EDGE_PADDING);
+        return { w, h, maxX, maxY };
+      }
+
+      // position initiale en bas à droite (viewport)
+      function initPosition() {
+        const padRight = 20, padBottom = 20;
+        const left = window.innerWidth - btn.offsetWidth - padRight;
+        const top  = window.innerHeight - btn.offsetHeight - padBottom;
+        btn.style.left = clamp(Math.round(left), 0, window.innerWidth) + 'px';
+        btn.style.top  = clamp(Math.round(top), 0, window.innerHeight) + 'px';
+      }
+
+      // ajuste la position pour garder le bouton totalement visible après scale
+      function keepInsideViewport(scale) {
+        // bounding box after scale (approx.)
+        const rect = btn.getBoundingClientRect();
+        const origW = rect.width / (scale || 1);
+        const origH = rect.height / (scale || 1);
+        const scaledW = origW * scale;
+        const scaledH = origH * scale;
+
+        // current left/top are in px (viewport)
+        let left = rect.left;
+        let top  = rect.top;
+
+        // because we scale around center, the visual bounding extends by half delta on each side
+        const halfDeltaW = (scaledW - origW) / 2;
+        const halfDeltaH = (scaledH - origH) / 2;
+
+        left = left - halfDeltaW;
+        top  = top  - halfDeltaH;
+
+        // clamp to viewport (so entire scaled element stays visible)
+        left = clamp(left, EDGE_PADDING, window.innerWidth - scaledW - EDGE_PADDING);
+        top  = clamp(top,  EDGE_PADDING, window.innerHeight - scaledH - EDGE_PADDING);
+
+        // convert back to left/top for the element's top-left used with transform center
+        // since we offset by halfDelta earlier, add it back
+        const adjustedLeft = left + halfDeltaW;
+        const adjustedTop  = top  + halfDeltaH;
+
+        btn.style.left = Math.round(adjustedLeft) + 'px';
+        btn.style.top  = Math.round(adjustedTop)  + 'px';
+      }
+
+      // calcule la targetScale selon la distance souris->centre bouton
+      function updateTargetScale(mx, my) {
+        if (window.innerWidth <= SMALL_SCREEN_MAX || !allowGrow) {
+          targetScale = MIN_SCALE;
+          return;
+        }
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top  + rect.height / 2;
+        const dx = cx - mx;
+        const dy = cy - my;
+        const dist = Math.hypot(dx, dy);
+
+        // si assez éloigné -> taille normale
+        if (dist >= DIST_THRESHOLD) {
+          targetScale = MIN_SCALE;
+          return;
+        }
+
+        // formule simple : plus on est proche, plus on se rapproche de MAX_SCALE
+        const closeness = 1 - (dist / Math.max(6, DIST_THRESHOLD)); // 0..1
+        const s = MIN_SCALE + closeness * (MAX_SCALE - MIN_SCALE);
+        targetScale = clamp(s, MIN_SCALE, MAX_SCALE);
+      }
+
+      // animation frame qui lisse la transition de scale vers targetScale
+      function animate() {
+        if (Math.abs(currentScale - targetScale) > 0.001) {
+          if (currentScale < targetScale) {
+            currentScale = Math.min(targetScale, currentScale + SCALE_INCR);
+          } else {
+            currentScale = Math.max(targetScale, currentScale - SCALE_DECR);
+          }
+          // appliquer scale et garder l'élément visible
+          btn.style.transform = 'scale(' + currentScale + ')';
+          keepInsideViewport(currentScale);
+        }
+        requestAnimationFrame(animate);
+      }
+
+      // gestion des mouvements de souris
+      document.addEventListener('mousemove', (e) => {
+        lastMouse.x = e.clientX;
+        lastMouse.y = e.clientY;
+        updateTargetScale(e.clientX, e.clientY);
+      }, { passive: true });
+
+      // si la souris entre sur le bouton : forcer une target élevée temporairement
+      btn.addEventListener('mouseenter', (e) => {
+        // on augmente la cible fortement pour produire effet de "devorer l'espace"
+        if (window.innerWidth <= SMALL_SCREEN_MAX || !allowGrow) return;
+        targetScale = Math.min(MAX_SCALE, Math.max(targetScale, 1.6));
+      });
+
+      // Accessibilité clavier : stoppe la croissance quand on focus le bouton
+      btn.addEventListener('focus', () => {
+        allowGrow = false;
+        targetScale = MIN_SCALE;
+      });
+      btn.addEventListener('blur', () => {
+        allowGrow = true;
+        // rebasing targetScale based on last mouse position
+        updateTargetScale(lastMouse.x, lastMouse.y);
+      });
+
+      // repositionne si la fenêtre change
+      window.addEventListener('resize', () => {
+        initPosition();
+        keepInsideViewport(currentScale);
+      });
+
+      // initialisation
+      initPosition();
+      requestAnimationFrame(animate);
+    });
   </script>
-        
+
 </body>
 </html>

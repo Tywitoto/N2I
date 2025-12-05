@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="..\ressources\Logo\logosite.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A propos - OpenListe</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="menu-toggle">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="dropdown-menu">
+                <li><a href="index.html#home">Accueil</a></li>
+                <li><a href="pages/bibliotheque.html">Bibliothèque</a></li>   
+                <li><a href="pages/snake.html">Snake</a></li>
+                <li><a href="index.html#services">Hardware responsable</a></li>
+                <li><a href="index.html#contact">A propos</a></li>   
+            </ul>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html#home">Accueil</a></li>
+            <li><a href="bibliotheque.html">Bibliothèque</a></li>
+            <li><a href="Hardware.html">Hardware responsable</a></li>
+            <li><a href="about.html"><b>A propos</b></a></li>
+        </ul>
+        <div class="search-and-logo">
+            <form class="search-bar" onsubmit="handleSearch(event)">
+                <input type="text" placeholder="Rechercher..." id="search-input">
+                <button type="submit" class="search-btn">🔎︎</button>
+            </form>
+            <div class="logo-circle"></div>
+        </div>
+    </nav>
+    
+     <header>
+        <h1>A propos</h1>
+        <p>En ce qui concerne notre equipe</p>
+    </header>
+
+    <main>
+        <h3>Depuis toujours, nous croyons que l’accès au savoir, à la culture et aux outils numériques ne devrait pas dépendre du pouvoir d’achat ou d’intérêts commerciaux. C’est pourquoi nous souhaitons lancer ce site : pour offrir une plate-forme centrée sur la liberté, la gratuité et l’ouverture, en offrant des alternatives libres et gratuites aux services et logiciels propriétaires.</h3>
+        <h3>En parallèle, proposer des ressources gratuites ou accessibles démocratise l’accès à la culture, à l’éducation, à l’information ou aux services numériques — ce qui, à nos yeux, est un enjeu fondamental dans notre société. Le principe des « ressources éducatives libres » et du « savoir libre » illustre ce désir de partage ouvert et équitable.</h3>       
+        <h3>Enfin, ce site est pour nous l’occasion de promouvoir un autre rapport à l’internet et à la technologie — un rapport basé sur la coopération, la communauté, la liberté et le partage de connaissances plutôt que sur la consommation, la propriété et les barrières.</h3>
+        <h3>L'équipe des nightfarers:Lison BEUGNIER,Raphaël FREVILLE,Damien GAZI,Thomas GOULEAU,Thomas IRUELA,Soren LAINE,Charly PICHON,Malone PISSOT,Swen POUESSEL.</h3>   
+               
+    </main>
+    
+    <footer>
+        <p>Par l'equipe nightfarers</p>
+    </footer>
+    
+    <script src="../JS/script.js"></script>
+</body>
+</html>
+
