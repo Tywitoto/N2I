@@ -21,31 +21,74 @@
                 <input type="text" placeholder="Rechercher..." id="search-input">
                 <button type="submit" class="search-btn">🔎︎</button>
             </form>
-            <div class="logo-circle"></div>
+            <div class="logo-circle">
+                <img src="ressources/Logo/logosite.png" alt="Logo site">
+            </div>
         </div>
     </nav>
     
     <header>
         <h1>Bienvenu sur OpenListe</h1>
-        <p> Decouvrez des alternatives de logiciels libres et open source</p>
+        <p>Decouvrez des alternatives de logiciels libres et open source</p>
     </header>
     
     <main>
+
         <div class="gif-floating" id="gifBox">
-                <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
+            <button class="close" onclick="document.getElementById('gifBox').remove()">×</button>
 
                 <!-- Make GIF clickable -->
                 <a href="https://www.carte-klub.com" target="_blank">
                     <img src="ressources/LogoAnime.gif" alt="Clickable GIF">
                 </a>
             </div>
-        
+
+        <!-- Trois grandes images cliquables -->
+        <section class="big-links">
+            <a class="big-card" href="https://fr.wikipedia.org/wiki/Linux" target="_blank">
+                <img src="ressources/logos/linux.png" alt="Linux">
+                <div class="card-title">linux</div>
+            </a>
+
+            <a class="big-card" href="https://fr.libreoffice.org" target="_blank">
+                <img src="ressources/logos/libreoffice.png" alt="LibreOffice">
+                <div class="card-title">LibreOffice</div>
+            </a>
+
+            <a class="big-card" href="https://www.ecosia.org/?c=fr" target="_blank">
+                <img src="ressources/logos/ecosia.png" alt="Ecosia">
+                <div class="card-title">Ecosia</div>
+            </a>
+        </section>
+
     </main>
     
     <footer>
         <p>Par l'equipe Nightfarers</p>
     </footer>
+
     
+<script>
+    // ----- 50/50 configuration -----
+    const options = [
+        {
+            gif: "ressources/LogoAnime.gif",
+            link: "https://www.carte-klub.com"
+        },
+        {
+            gif: "https://art.pixilart.com/8bae488c7808f9e.gif",   // 👉 mets ton deuxième GIF ici
+            link: "pages/snake.html"    // 👉 et ton autre lien ici
+        }
+    ];
+
+    // Choix aléatoire (0 ou 1)
+    const choice = options[Math.floor(Math.random() * 2)];
+
+    // On applique
+    document.getElementById("gifImage").src = choice.gif;
+    document.getElementById("gifLink").href = choice.link;
+</script>
+
     <script src="JS/script.js"></script>
 </body>
 </html>
