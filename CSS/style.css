@@ -2,10 +2,10 @@
 :root {
     --primary-color: #203446;
     --secondary-color: #203446;
-    --accent-color: #E9EAF5;
-    --nabbar-bg: #333;
+    --accent-color: #ffffff;
+    --nabbar-bg: #203446;
     --dark-hover: #555;
-    --bg-dark-1: #282828;
+    --bg-dark-1: #335470;
     --bg-dark-2: #353535;
     --light-text: #ffffff;
     --mid-text: #e7e7e7;
@@ -60,7 +60,7 @@
 .search-and-logo {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .search-bar {
